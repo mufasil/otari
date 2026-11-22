@@ -9031,16 +9031,9 @@
             "type": "string"
           },
           "last4": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "description": "The last four characters of the stored value.",
-            "title": "Last4"
+            "title": "Last4",
+            "type": "string"
           },
           "method": {
             "description": "How the credential is produced. Reported as plain text rather than a closed set, so a reader built before a later method still renders a key that uses one.",
@@ -9055,6 +9048,7 @@
         "required": [
           "method",
           "header_name",
+          "last4",
           "expires_at",
           "state"
         ],
