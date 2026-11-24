@@ -338,13 +338,15 @@ describe("nav registry", () => {
     expect(overview?.capability).toBeUndefined()
   })
 
-  it("files Requests under Sessions rather than a row of its own", () => {
-    // Sessions and Requests are two views under one title, each gated on its
-    // own surface inside the page, so Requests adds no row.
+  it("files Requests and Router savings under Sessions rather than rows of their own", () => {
+    // Views under one title, each gated on its own surface inside the page,
+    // so neither adds a row.
     const sessions = NAV_ITEMS.find((item) => item.label === "Sessions")
-    expect(sessions?.views).toEqual(["/requests"])
-    expect(NAV_ITEMS.map((item) => item.to)).not.toContain("/requests")
-    expect(railPathForPath("/requests")).toBe("/sessions")
+    expect(sessions?.views).toEqual(["/requests", "/router-savings"])
+    for (const view of ["/requests", "/router-savings"]) {
+      expect(NAV_ITEMS.map((item) => item.to)).not.toContain(view)
+      expect(railPathForPath(view)).toBe("/sessions")
+    }
   })
 
   it("declares who in the organization may open a destination, and no others", () => {
@@ -974,6 +976,7 @@ const WORKSPACE = [
   "/",
   "/sessions",
   "/requests",
+  "/router-savings",
   "/people",
   "/rules",
   "/models",
